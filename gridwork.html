@@ -2191,12 +2191,18 @@
     state.view = view;
     document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
     if (view === 'posts') {
+      // Lock the grid: cancel any in-flight camera animation and stop tracking
+      // the user so the background stays frozen while scrolling the feed.
+      followAnim = null;
+      state.followUser = false;
+      closeTagMode();
       postsView.classList.remove('hidden');
       renderPosts();
-      closeTagMode();
       searchDropdown.classList.remove('open');
+      draw();
     } else {
       postsView.classList.add('hidden');
+      draw();
     }
   }
   document.querySelectorAll('.tab').forEach(t => {
