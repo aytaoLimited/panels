@@ -52,7 +52,9 @@
     font-size: 12px; color: var(--muted);
     background: var(--panel); border: 1px solid var(--border);
     padding: 6px 10px; border-radius: 8px;
+    cursor: pointer; transition: background .14s, border-color .14s, color .14s;
   }
+  .pos-readout:hover { background: var(--panel-2); border-color: var(--accent); color: var(--text); }
   .pos-readout b { color: var(--text); }
 
   /* ---- top tabs (map / posts) ---- */
@@ -522,7 +524,7 @@
       <button class="tab" data-view="posts" title="Posts view">☰</button>
     </div>
     <div class="spacer"></div>
-    <div class="pos-readout">your panel&nbsp; <b id="posReadout">[0, 0]</b></div>
+    <button class="pos-readout" id="posReadoutBtn" title="Center on your panel">your panel&nbsp; <b id="posReadout">[0, 0]</b></button>
     <button class="btn ghost icon" id="settingsBtn" title="Settings" aria-label="Settings">⚙</button>
   </div>
 
@@ -660,6 +662,7 @@
   const toastEl = document.getElementById('toast');
   const cardEl = document.getElementById('usercard');
   const posReadout = document.getElementById('posReadout');
+  const posReadoutBtn = document.getElementById('posReadoutBtn');
   const zoomVal = document.getElementById('zoomVal');
 
   // ---------- state ----------
@@ -1820,6 +1823,11 @@
   document.getElementById('zoomIn').addEventListener('click', () => setZoom(state.camera.zoom * 1.25));
   document.getElementById('zoomOut').addEventListener('click', () => setZoom(state.camera.zoom / 1.25));
   document.getElementById('recenter').addEventListener('click', () => {
+    recenterOnUser(true);
+    toast('centered on your panel');
+  });
+  posReadoutBtn.addEventListener('click', () => {
+    if (state.view !== 'map') switchView('map');
     recenterOnUser(true);
     toast('centered on your panel');
   });
