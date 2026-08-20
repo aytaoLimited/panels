@@ -34,4 +34,6 @@ Vanilla JS + Canvas 2D. No dependencies, no build tools, no server. Everything l
 
 ## Repo
 
-Private by default. This is a demo project, not published.
+Public. https://github.com/aytaoLimited/panels
+
+Versioning follows `VERSION` (semantic versioning): MAJOR.MINOR.PATCH. New features bump MINOR, fixes/internal changes bump PATCH, breaking changes bump MAJOR.
