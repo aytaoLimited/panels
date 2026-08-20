@@ -34,7 +34,8 @@
     background: linear-gradient(180deg, rgba(13,17,23,.92), rgba(13,17,23,.6));
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
-    z-index: 20;
+    z-index: 120;
+    position: relative;
   }
   .logo {
     display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px;
@@ -1827,6 +1828,7 @@
     toast('centered on your panel');
   });
   posReadoutBtn.addEventListener('click', () => {
+    if (focusOverlay.classList.contains('open')) { closeFocus(); }
     if (state.view !== 'map') switchView('map');
     recenterOnUser(true);
     toast('centered on your panel');
